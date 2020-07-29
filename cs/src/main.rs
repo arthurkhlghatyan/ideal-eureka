@@ -1,35 +1,39 @@
 // Declare modules
 // mod miscellaneous;
 // mod sorting;
-use std::fs::File;
-use std::io::ErrorKind;
+
+pub trait Summary {
+  fn summarize_author(&self) -> &String;
+
+  fn summarize(&self) -> String {
+    format!("Read more from {}", self.summarize_author())
+  }
+}
+
+pub struct NewsArticle {
+  author: String
+}
+
+impl Summary for NewsArticle {
+  fn summarize_author(&self) -> &String {
+    &self.author
+  }
+}
+
+pub struct Sender {}
+
+impl Sender {
+  pub fn message(&self, article: &impl Summary) {
+    println!("{}", article.summarize_author());
+  }
+}
 
 fn main() {
-  let f = File::open("hello.txt");
-
-  let f = match f {
-    Ok(file) => file,
-    Err(error) => match error.kind() {
-      ErrorKind::NotFound => match File::create("hello.txt") {
-        Ok(fc) => fc,
-        Err(e) => panic!("Problem creating the file: {:?}", e),
-      },
-      other_error => {
-        panic!("Problem opening the file: {:?}", other_error)
-      }
-    },
+  let article = NewsArticle {
+    author: String::from("Arthur")
   };
 
-  // let m1: Vec<Vec<i64>> = vec![
-  //   vec![1, 2, 3],
-  //   vec![2, 4, 1],
-  //   vec![5, 6, 2]
-  // ];
+  let sender = Sender {};
 
-  // let m2: Vec<Vec<i64>> = vec![
-  //   vec![2, 3, 4],
-  //   vec![1, 2, 10],
-  // ];
-
-  // miscellaneous::multiply_matrices(m1, m2);
+  sender.message(&article);
 }
