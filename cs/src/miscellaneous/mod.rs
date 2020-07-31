@@ -1,6 +1,5 @@
-mod sequence_analysis;
-mod multiply_matrices;
-
-// Expose functions inside main module scope
-pub use sequence_analysis::sequence_analysis;
-pub use multiply_matrices::multiply_matrices;
+pub mod sequence_analysis;
+pub mod multiply_matrices;
+pub mod century_from_year;
+pub mod check_panlindrome;
+pub mod adjacent_elements_product;

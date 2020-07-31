@@ -1,10 +1,12 @@
 // Declare modules
 // mod miscellaneous;
 // mod sorting;
-mod codesignal;
+mod arrays;
 
 fn main() {
+  let v = vec![2, 1, 3, 5, 3, 2, 3, 3, 2];
 
-  println!("{}", codesignal::century_from_year::century_from_year(100));
+  let f_dup = arrays::first_duplicate::first_duplicate(v);
 
+  println!("{} is occurence", f_dup);
 }
